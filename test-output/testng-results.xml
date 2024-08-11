@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="4" total="5" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-08-11T20:44:09 EET" name="Default suite" finished-at="2024-08-11T20:44:52 EET" duration-ms="42409">
+    <groups>
+    </groups>
+    <test started-at="2024-08-11T20:44:09 EET" name="Default test" finished-at="2024-08-11T20:44:52 EET" duration-ms="42409">
+      <class name="magnetoWebsiteTesting.Myfirsttest">
+        <test-method is-config="true" signature="mySetup()[pri:0, instance:magnetoWebsiteTesting.Myfirsttest@54dcfa5a]" started-at="2024-08-11T20:44:09 EET" name="mySetup" finished-at="2024-08-11T20:44:24 EET" duration-ms="14960" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mySetup -->
+        <test-method signature="addWomenItem()[pri:5, instance:magnetoWebsiteTesting.Myfirsttest@54dcfa5a]" started-at="2024-08-11T20:44:24 EET" name="addWomenItem" finished-at="2024-08-11T20:44:52 EET" duration-ms="27422" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addWomenItem -->
+      </class> <!-- magnetoWebsiteTesting.Myfirsttest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
