@@ -5,8 +5,9 @@
     <classes>
       <class name="magnetoWebsiteTesting.Myfirsttest">
         <methods>
-          <include name="SubmitReview"/>
+          <include name="addMenItem"/>
           <include name="mySetup"/>
+          <include name="loginTest"/>
         </methods>
       </class> <!-- magnetoWebsiteTesting.Myfirsttest -->
     </classes>

@@ -1,89 +1,44 @@
 package magnetoWebsiteTesting;
 
 import static org.testng.Assert.assertEquals;
-
-import java.time.Duration;
 import java.util.List;
-import java.util.Random;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class Myfirsttest {
-
-	WebDriver driver = new ChromeDriver();
-
-	String myWebsite = "https://magento.softwaretestingboard.com/";
-	String logoutPage = "https://magento.softwaretestingboard.com/customer/account/logout/";
-	Random rand = new Random();
-	String checkout = "https://magento.softwaretestingboard.com/checkout/cart/";
-
-	String password = "iLoveMyMom!234k";
-
-	String emailAddressToLogin = "";
+public class Myfirsttest extends MyTesting {
 
 	@BeforeTest
 	public void mySetup() {
-		driver.manage().window().maximize();
-		driver.get(myWebsite);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-
+		Mysetupnew();
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	public void CreateAnAccount() {
 
 		// xpath
 //		WebElement createAccountPage = driver.findElement(By.xpath("//a[@href='https://magento.softwaretestingboard.com/customer/account/create/']"));
 
 		// partialLinkText
-
 //		WebElement createAccountPage = driver.findElement(By.partialLinkText("Account"));
 
 		// linkText
 //		WebElement createAccountPage = driver.findElement(By.linkText("Create an Account"));
-//
 
 		WebElement createAccountPage = driver
 				.findElement(By.cssSelector("header[class='page-header'] li:nth-child(3) a:nth-child(1)"));
 		createAccountPage.click();
-
-		// example
-//		String[] thearrayNameforExampleFirstNames = { "firstname", "firstname2", "firstname3" };
-
-		// first names
-		String[] first_Names = { "Alice", "Bob", "Charlie", "David", "Eve", "Fay", "Grace" };
-		// last names
-		String[] Last_Names = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia" };
-
-		int randomIndexForTheFirstName = rand.nextInt(first_Names.length);
-		int randomIndexForTheLastName = rand.nextInt(Last_Names.length);
-
-		System.out.println(randomIndexForTheFirstName);
-		System.out.println(randomIndexForTheLastName);
-
+		
 		WebElement firstNameInput = driver.findElement(By.id("firstname"));
 		WebElement lastNameInput = driver.findElement(By.id("lastname"));
 		WebElement emailAddressInput = driver.findElement(By.id("email_address"));
 		WebElement passwordInput = driver.findElement(By.id("password"));
 		WebElement confirmPassword = driver.findElement(By.id("password-confirmation"));
 		WebElement createAccountButton = driver.findElement(By.xpath("//button[@title='Create an Account']"));
-		String firstname = first_Names[randomIndexForTheFirstName];
-
-		String lastname = Last_Names[randomIndexForTheLastName];
-
-		System.out.println(firstname);
-		System.out.println(lastname);
-		int randomnumber = rand.nextInt(9876);
-
-		String domainName = "@gmail.com";
-
+		
 		firstNameInput.sendKeys(firstname);
 		lastNameInput.sendKeys(lastname);
 		emailAddressInput.sendKeys(firstname + lastname + randomnumber + domainName);
@@ -94,27 +49,24 @@ public class Myfirsttest {
 		WebElement messagealert = driver.findElement(By.className("messages"));
 
 		String ActualMessage = messagealert.getText();
-		String ExpectedMessage = "Thank you for registering with Main Website Store.";
 		Assert.assertEquals(ActualMessage, ExpectedMessage);
 
 		emailAddressToLogin = firstname + lastname + randomnumber + domainName;
 
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2)
 	public void logOut() {
 		driver.get(logoutPage);
 
 		WebElement Messagelogout = driver.findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']"));
 
 		String ActaulMessage = Messagelogout.getText();
-		String ExpectedMessage = "You are signed out";
-
-		Assert.assertEquals(ActaulMessage, ExpectedMessage);
+		Assert.assertEquals(ActaulMessage, ExpectedMessage1);
 
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 	public void loginTest() {
 		WebElement LoginPage = driver.findElement(By.linkText("Sign In"));
 		LoginPage.click();
@@ -130,31 +82,26 @@ public class Myfirsttest {
 		String Messagelogin = driver.findElement(By.className("logged-in")).getTagName();
 
 		boolean ActualMessage = Messagelogin.contains("Welcome");
-		boolean ExpectedMessage = true;
-
-		Assert.assertEquals(ActualMessage, ExpectedMessage);
+		Assert.assertEquals(ActualMessage, ExpectedMessage2);
 
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4)
 
 	public void addMenItem() throws InterruptedException {
 		WebElement MenSection = driver.findElement(By.cssSelector("#ui-id-5"));
 		MenSection.click();
 
 		WebElement OlItemsContainer = driver.findElement(By.className("product-items"));
-
-		System.out.println(OlItemsContainer.findElements(By.tagName("li")).size());
 		List<WebElement> Items = OlItemsContainer.findElements(By.tagName("li"));
 
 		int randomIndex = rand.nextInt(Items.size());
-		System.out.println(randomIndex);
 		Items.get(randomIndex).click();
 
 		WebElement SizesContainer = driver
 				.findElement(By.cssSelector("div[class='swatch-attribute size'] div[role='listbox']"));
-
 		List<WebElement> allSizes = SizesContainer.findElements(By.tagName("div"));
+		
 		int RandomSize = rand.nextInt(allSizes.size());
 		allSizes.get(RandomSize).click();
 
@@ -170,8 +117,6 @@ public class Myfirsttest {
 		addtocartbutton.click();
 
 		WebElement messegeAdded = driver.findElement(By.className("message-success"));
-		System.out.println(messegeAdded.getText().contains("You added"));
-
 		assertEquals(messegeAdded.getText().contains("You added"), true);
 
 	}
@@ -182,17 +127,7 @@ public class Myfirsttest {
 
 		WomenSection.click();
 
-		;
-
-//		System.out.println(driver.findElements(By.className("product-item")).size());
-
 		WebElement productITemsContainer = driver.findElement(By.className("product-items"));
-
-//		System.out.println(productITemsContainer.findElements(By.className("product-item")).size());;
-//		
-//		; 
-
-//		System.out.println(driver.findElements(By.tagName("li")).size());
 
 		List<WebElement> AllItems = productITemsContainer.findElements(By.tagName("li"));
 
@@ -200,23 +135,15 @@ public class Myfirsttest {
 		int randomItem = rand.nextInt(totalNumberOfItems);
 
 		AllItems.get(randomItem).click();
-		;
 
 		WebElement theContainerOfSizes = driver.findElement(By.cssSelector(".swatch-attribute-options.clearfix"));
 
-		;
-
-//		String[] sizes = { "33", "34", "36", "37" };
-// select any one for me i will select the first one 
-//System.out.println(theContainerOfSizes.findElements(By.className("swatch-option")).size());
-//System.out.println(theContainerOfSizes.findElements(By.tagName("div")).size());
 		List<WebElement> ListOfSizes = theContainerOfSizes.findElements(By.className("swatch-option"));
+		
 		int numberofSizes = ListOfSizes.size();
-
 		int randomSize = rand.nextInt(numberofSizes);
 		ListOfSizes.get(randomSize).click();
-		;
-
+		
 		WebElement ColorsContainer = driver
 				.findElement(By.cssSelector("div[class='swatch-attribute color'] div[role='listbox']"));
 		List<WebElement> ListOfClors = ColorsContainer.findElements(By.tagName("div"));
@@ -233,8 +160,6 @@ public class Myfirsttest {
 
 		WebElement MessageAdded = driver.findElement(By.cssSelector(".message-success.success.message"));
 
-		System.out.println(MessageAdded.getText().contains("You added"));
-
 		Assert.assertEquals(MessageAdded.getText().contains("You added"), true);
 
 // review section 
@@ -244,21 +169,15 @@ public class Myfirsttest {
 		WebElement ReviewSEction = driver.findElement(By.id("tab-label-reviews-title"));
 
 		ReviewSEction.click();
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
+		
 		js.executeScript("window.scrollTo(0,1200)");
 
 		Thread.sleep(2000);
 
 		WebElement RatingStars = driver.findElement(By.cssSelector(".control.review-control-vote"));
 
-		;
 
 		Thread.sleep(2000);
-
-		System.out.println(RatingStars.findElements(By.tagName("label")).size() + "*****************");
-//		RatingStars.findElements(By.tagName("label")).get(2).click();
 
 		String[] ids = { "Rating_1", "Rating_2", "Rating_3", "Rating_4", "Rating_5" };
 		int randomIndex = rand.nextInt(ids.length);
@@ -282,8 +201,6 @@ public class Myfirsttest {
 		submitReviewButton.click();
 
 		String actualTextforReview = driver.findElement(By.cssSelector(".message-success.success.message")).getText();
-		String expectedTextforReview = "You submitted your review for moderation.";
-
 		Assert.assertEquals(actualTextforReview, expectedTextforReview);
 
 	}
